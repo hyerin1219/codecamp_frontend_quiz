@@ -23,7 +23,7 @@ export default function fethBoardPage() {
 
     const {data} = useQuery( FETCH_PRODUCT, {
         variables: {
-            productId: Number(router.query._id)
+            productId: Number(router.query.productId)
         }
     })
     

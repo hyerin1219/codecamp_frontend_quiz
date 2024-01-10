@@ -1,5 +1,5 @@
 import { useMutation, gql } from "@apollo/client"
-// import { useRouter } from "next/router"
+import { useRouter } from "next/router"
 import { useState } from "react"
 
 const CREATE_PRODUCT = gql`
@@ -32,7 +32,7 @@ export default function BoardPage() {
         setPrice(event.target.value)
     }
 
-    // const router = useRouter()
+    
 
     const [Mygql] = useMutation(CREATE_PRODUCT)
 
@@ -44,21 +44,22 @@ export default function BoardPage() {
                 createProductInput: {
                     name,
                     detail,
-                    price
+                    price: Number(price)
                 }
             }
         }) 
 
         console.log(result)
+
     }
 
     
     return (
         <div>
-            판매자: <input type="text" onChanege={changeSeller} />
-            상품명: <input type="text" onChanege={changeName} />
-            상품내용: <input type="text" onChanege={changeDetail} />
-            상품가격: <input type="text" onChanege={changePrice} />
+            판매자: <input type="text" onChange={changeSeller} />
+            상품명: <input type="text" onChange={changeName} />
+            상품내용: <input type="text" onChange={changeDetail} />
+            상품가격: <input type="text" onChange={changePrice} />
             <button onClick={onClickSubmit}>상품 등록</button>
         </div>
     )
