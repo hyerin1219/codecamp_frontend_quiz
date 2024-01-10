@@ -40,7 +40,7 @@ export default function BoardPage() {
 
         const result = await Mygql({
             variables: {
-                seller
+                seller,
                 createProductInput: {
                     name,
                     detail,
