@@ -36,20 +36,33 @@ export default function BoardPage() {
 
     const [Mygql] = useMutation(CREATE_PRODUCT)
 
+    const router = useRouter()
+
     const onClickSubmit = async () => {
 
-        const result = await Mygql({
-            variables: {
-                seller,
-                createProductInput: {
-                    name,
-                    detail,
-                    price: Number(price)
-                }
-            }
-        }) 
+        try {
 
-        console.log(result)
+            const result = await Mygql({
+                variables: {
+                    seller,
+                    createProductInput: {
+                        name,
+                        detail,
+                        price: Number(price)
+                    }
+                }
+            }) 
+    
+            console.log(result)
+            console.log(result.data.createProduct._id)
+            router.push(`/section08_quiz/board-moved/ ${result.data.createProduct._id}`)
+
+
+        } catch(error) {
+            alert(error.message)
+        }
+
+        
 
     }
 

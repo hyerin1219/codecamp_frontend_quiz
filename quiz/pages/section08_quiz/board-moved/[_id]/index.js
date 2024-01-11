@@ -5,7 +5,7 @@ const FETCH_PRODUCT = gql`
     query fetchProduct($productId: ID) {
         fetchProduct(
             productId: $productId
-        ){
+        ) {
             _id
             seller
             name
@@ -17,26 +17,28 @@ const FETCH_PRODUCT = gql`
 `
 
 
-export default function fethBoardPage() {
+export default function fecthBoardPage() {
     
     const router = useRouter()
 
+    console.log(router)
+
     const {data} = useQuery( FETCH_PRODUCT, {
         variables: {
-            productId: Number(router.query.productId)
+            productId: router.query._id
         }
     })
-    
+
     console.log(data)
+
     
     return (
 
         <div>
-            <div>{router.query._id}님의 상품을 불러왔습니다.</div>
-            <div>판매자: {router.query.seller}</div>
-            <div>상품명: {router.query.name}</div>
-            <div>내용: {router.query.detail}</div>
-            <div>가격:{router.query.price} </div>
+            <div>판매자: {data ? fetchProduct.seller : "loading"}</div>
+            <div>상품명: {data ? fetchProduct.name : "loading"}</div>
+            <div>내용: {data ? fetchProduct.detail : "loading"}</div>
+            <div>가격:{data ? fetchProduct.price : "loading"} </div>
         </div>
 
     )
