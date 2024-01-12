@@ -6,9 +6,11 @@ export const TextInput = styled.input`
 `
 
 export const ClickButton = styled.button`
-    background-color: #fff;
+    background-color: ${(props) => props.isActive ? "yellow" : "" };
     border: 2px solid red;
     border-radius: 10px;
+
+
 `
 
 export const Box = styled.div`
