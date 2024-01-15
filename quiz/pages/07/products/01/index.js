@@ -23,7 +23,7 @@ const DELETE_PRODUCT = gql`
 `
 
 
-export default function createProductsPage() {
+export default function deleteProductsPage() {
 
     const { data } = useQuery(FETCH_PRODUCTS)
 
@@ -33,7 +33,7 @@ export default function createProductsPage() {
 
     const onclickDelete = (event) => {
         deleteProduct({
-            variables: {productId: event.target._id},
+            variables: {productId: event.target.id},
             refetchQueries: [{query: FETCH_PRODUCTS}]
         })
 
@@ -50,7 +50,6 @@ export default function createProductsPage() {
                     <span>{el._id}</span>
                     <span>{el.seller}</span>,
                     <span>{el.name}</span>,
-                    <span>{el.detail} </span>,
                     <span>{el.price}</span>
                     <button id={el._id} onClick={onclickDelete}>삭제</button>
                     {console.log(el._id)}
