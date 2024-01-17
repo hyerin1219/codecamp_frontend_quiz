@@ -47,15 +47,15 @@ export default function ProductComponentPage(props) {
 
     const onClickEdit = async () => {
 
-        const myVariables = {productId: router.query._id}
+        const myVariables = {}
         if(seller) {myVariables.seller = seller}
         if(name) {myVariables.name = name}
         if(detail) {myVariables.detail = detail}
         if(price) {myVariables.price = Number(price)}
 
-        console.log(myVariables.name)
 
         const result = await UpdateGql({
+            productId: router.query._id,
             variables: myVariables
         })
 
