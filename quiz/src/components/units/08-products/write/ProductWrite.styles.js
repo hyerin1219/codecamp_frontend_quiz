@@ -11,4 +11,5 @@ export const WriteButton = styled.button`
     padding: 5px;
     border-radius: 10px;
     background-color: #fff;
+    cursor: pointer;
 `

@@ -3,6 +3,6 @@ import ProductComponentsPage from '../../../src/components/units/08-products/wri
 export default function ProductNewPage() {
 
     return(
-        <ProductComponentPage/>
+        <ProductComponentsPage isEdit={false}/>
     )
 }
