@@ -1,6 +1,6 @@
 import { CREATE_PRODUCT, UPDATE_PRODUCT } from "./ProductWrite.queries";
 import ProductComponentsUI from "./ProductWrite.presenter"
-import { useMutation } from "@apollo/client"
+import { useMutation} from "@apollo/client"
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -37,7 +37,7 @@ export default function ProductComponentPage(props) {
                 createProductInput: {
                     name,
                     detail,
-                    price
+                    price: Number(price)
                 }
             }
         })
@@ -46,19 +46,22 @@ export default function ProductComponentPage(props) {
     }
 
     const onClickEdit = async () => {
-        const result = await UpdateGql({
-            variables: {
-                productId,
-                updateProductInput: {
-                    name,
-                    detail,
-                    price
-                }
-            }
-        })
-        console.log(result)
-    }
 
+        const myVariables = {productId: router.query._id}
+        if(seller) {myVariables.seller = seller}
+        if(name) {myVariables.name = name}
+        if(detail) {myVariables.detail = detail}
+        if(price) {myVariables.price = Number(price)}
+
+        console.log(myVariables.name)
+
+        const result = await UpdateGql({
+            variables: myVariables
+        })
+
+        router.push(`/08/${result.data.updateProduct._id}`)
+    }
+    
     return(
         <ProductComponentsUI 
             onClickNew={onClickNew}
@@ -68,6 +71,7 @@ export default function ProductComponentPage(props) {
             writeDetail={writeDetail}
             writePrice={writePrice}
             isEdit={props.isEdit}
+            data={props.data}
         />
     ) 
 }
