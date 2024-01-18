@@ -55,8 +55,11 @@ export default function ProductComponentPage(props) {
 
 
         const result = await UpdateGql({
-            productId: router.query._id,
-            variables: myVariables
+            variables: {
+                productId: router.query._id,
+                updateProductInput: myVariables
+            }
+
         })
 
         router.push(`/08/${result.data.updateProduct._id}`)
