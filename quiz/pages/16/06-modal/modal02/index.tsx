@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { useState } from 'react';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { Button, Modal } from 'antd';
@@ -14,7 +14,7 @@ export default function AddressModalPage():JSX.Element {
         setIsModalOpen((prev) => !prev)
     }
 
-    const addressData = (data):void => {
+    const addressData = (data:SetStateAction<string>):void => {
         setAdderss(data.address)
         onToggleModel()
     }
