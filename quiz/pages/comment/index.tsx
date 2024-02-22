@@ -7,7 +7,6 @@ export default function CommentPage ():JSX.Element {
     return (
         <>
             <CommentWrite/>
-            <CommentList/>
         </>
     )
 }

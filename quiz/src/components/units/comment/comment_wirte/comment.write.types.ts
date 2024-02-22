@@ -1,9 +1,9 @@
+import type { ChangeEvent } from "react"
+
 export interface ICommentWriteUIProps {
     onClickSubmit: () => void
-    onChangeInputs: (event:any)=> void
-    inputs: {
-        writer: string,
-        password: string,
-        contents: string
-    }
+    onChangeWriter: (event:ChangeEvent<HTMLInputElement>)=> void
+    onChangePassword: (event:ChangeEvent<HTMLInputElement>)=> void
+    onChangeContents: (event:ChangeEvent<HTMLTextAreaElement>)=> void
+    contents: string
 }
