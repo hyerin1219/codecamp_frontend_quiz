@@ -9,6 +9,7 @@ export default function OpenApiPage():JSX.Element {
         const openApi = async (): Promise<void> => {
             const result = await axios.get("https://dog.ceo/dog-api/")
             setDog(result.data.message)
+            console.log(result.data.message)
         }
         void openApi()
     })
