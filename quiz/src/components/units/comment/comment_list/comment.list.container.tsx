@@ -22,7 +22,7 @@ export default function CommentList(props:ICommentListProps):JSX.Element {
         await deleteBoardComment({
             variables: {
                 password: props.password,
-                boardCommentsId: props.data?.fetchBoardComments?._id 
+                boardCommentId: props.data?.fetchBoardComments?._id 
             },
             refetchQueries: [{
                 query: FETCH_BOARD_COMMENTS,
