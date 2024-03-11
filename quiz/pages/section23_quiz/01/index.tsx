@@ -25,10 +25,10 @@ export default function SearchPage():JSX.Element {
         void refetch({page: Number(event.currentTarget.id)})
     }
 
-    const getDebounce = _.debounce(value) => {
-        refetch({search: value, page: 1})
+    const getDebounce = _.debounce((value) => {
+        void refetch({search: value, page: 1})
         setKeyword(value)
-    }
+    },500) 
 
     const onChangeSearch = (event:ChangeEvent<HTMLInputElement>):void => {
         getDebounce(event.currentTarget.value)
@@ -44,7 +44,14 @@ export default function SearchPage():JSX.Element {
             {
                 data?.fetchBoards.map((el) => (
                     <div style={{display: "flex", margin: "20px"}} key={el._id} >
-                        <div style={{margin: "0 20p", width: "300px"}}>{el.title}</div>
+                        <div style={{margin: "0 20px", width: "300px"}}>{el.writer}</div>
+
+                        <div style={{margin: "0 20px", width: "300px"}}>
+                            {el.title.replaceAll(keyword, `@##$%^^${keyword}@##$%^^`).split("@##$%^^").map((el) => (
+                                <span  key={uuidv4()} style={{color: el === keyword ? "red" : "black"}}>{el} </span>
+                        ))}
+                        </div>
+
                         <div>{el.contents}</div>
                     </div>
                 ))
