@@ -15,7 +15,7 @@ const FETCH_BOARDS = gql `
     }
 `
 
-export default function SearchPage() {
+export default function SearchPage():JSX.Element {
     const [search, setSearch] = useState("");
     const [debounce, setDebounce] = useState(0); // state 추가
 
@@ -24,61 +24,60 @@ export default function SearchPage() {
 
     // lodash의 디바운스 const getDebounce = _.debounce((data) => {   refetch({ search:
     // data });   setSearch(data); }, 500); 직접 구현
-    function getDebounce(data : string) {
+    function getDebounce(data : string):void {
         if (debounce) 
             window.clearTimeout(debounce);
         
         const time = window.setTimeout(() => {
             console.log("실행");
-            refetch({search: data});
+            void refetch({search: data});
             setSearch(data);
         }, 500);
 
         setDebounce(time);
     }
 
-    function onChangeSearch(event : ChangeEvent<HTMLInputElement>) {
+    function onChangeSearch(event : ChangeEvent<HTMLInputElement>):void {
         getDebounce(event.target.value);
     }
 
-    function onClickPage(event : MouseEvent<HTMLSpanElement>) {
-        refetch({
+    function onClickPage(event : MouseEvent<HTMLSpanElement>):void {
+        void refetch({
             search: search,
             page: Number((event.target as Element).id)
         });
     }
 
     return (
-        <> < input type = "text" onChange = {
-            onChangeSearch
-        } /> {/* <button onClick={onClickSearch}>검색하기</button> */
-        } {
-            data
-                ?
-                    .fetchBoards
-                    .map((data) => (< div key = {
-                        data._id
-                    } > <span> {
-                        data.writer
-                    }</span><span> {
-                        data.title
-                    }</span><span> {
-                        data.createdAt
-                    }</span></div>))
-        } {
-            new Array(10)
-                .fill(1)
-                .map((_, index) => (< span key = {
-                    index
-                }
-                id = {
-                    String(index + 1)
-                }
-                onClick = {
-                    onClickPage
-                } > {
-                    index + 1
-                }</span>))
-        }</>
+        <> 
+            <input type = "text" onChange = {onChangeSearch } /> 
+            {
+                data?.fetchBoards.map((data) => (< div key = {
+                            data._id
+                        } > <span> {
+                            data.writer
+                        }</span><span> {
+                            data.title
+                        }</span><span> {
+                            data.createdAt
+                        }</span></div>))
+            } 
+            {
+                new Array(10)
+                    .fill(1)
+                    .map((_, index) => (< span key = {
+                        index
+                    }
+                    id = {
+                        String(index + 1)
+                    }
+                    onClick = {
+                        onClickPage
+                    } > {
+                        index + 1
+                    }</span>))
+            }
+        </>
     );
+    
 }
