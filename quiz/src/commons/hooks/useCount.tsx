@@ -1,6 +1,11 @@
 import { useState } from "react"
 
-export const useCount = () => {
+interface IUSeCountReturn {
+    count: any
+    onClickButton: () => void
+}
+
+export const useCount = (): IUSeCountReturn => {
     const [count, setCount] = useState(0)
 
     const onClickButton = ():void => {
